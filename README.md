@@ -34,8 +34,34 @@ def selectionSort():
         list1[i], list1[min] = list1[min], list1[i]
     return list1
 
+
+def mergeSort(list1):
+    lengthList1 = len(list1)
+    if lengthList1 == 1:
+        return list1
+    midList1= lengthList1 // 2
+    L = mergeSort(list1[:midList1])
+    R = mergeSort(list1[midList1:])
+    return merge(L,R)
+
+def merge(left, right):
+    mergeList1 = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            mergeList1.append(left[i])
+            i += 1
+        else:
+            mergeList1.append(right[j])
+            j += 1
+    mergeList1.extend(left[i:])
+    mergeList1.extend(right[j:])
+
+    return mergeList1
+
+
 print("Menu")
-print("1.Bubble Sort.\n2.Insertion sort.\n3.Selection sort.\n4.Exit.")
+print("1.Bubble Sort.\n2.Insertion sort.\n3.Selection sort.\n4.Merge sort\n5.Exit.")
 
 while True :
     ch=int(input("Enter the choice : "))
@@ -55,9 +81,14 @@ while True :
         print("After Sorting : ", selectionSort())
 
     elif ch==4:
-        print("Thank you.")
+        creation()
+        print("Before Sorting : ",list1)
+        sortedList1 = mergeSort(list1)
+        print("After Sorting : ",sortedList1)
+
+    elif ch==5:
+        print("Thank You !!!")
         break
     else:
         print("Invalid choice")
-
 
